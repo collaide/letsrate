@@ -47,7 +47,6 @@ def print_div_stars(dimension, rating, id, class_name, disable_after_rate, reado
       "data-readonly" => readonly,
       "data-star-count" => star_count,
       test: false,
-      test: 'salut',
       test2: true,
   }
   options['data-path'] = path if path
