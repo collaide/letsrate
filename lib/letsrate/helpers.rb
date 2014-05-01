@@ -10,7 +10,7 @@ module Helpers
 
     disable_after_rate = options[:disable_after_rate] || true
 
-    readonly = !(current_user && rateable_obj.can_rate?(current_user, dimension))
+    readonly = (current_user && rateable_obj.can_rate?(current_user, dimension))
 
     print_div_stars dimension, avg, rateable_obj.id, rateable_obj.class.name, disable_after_rate, readonly, star, path
   end
