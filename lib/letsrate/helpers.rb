@@ -11,11 +11,7 @@ module Helpers
 
     readonly = !(current_user && rateable_obj.can_rate?(current_user, dimension))
 
-    content_tag :div, '', "data-dimension" => dimension, :class => "star", "data-rating" => avg,
-                "data-id" => rateable_obj.id, "data-classname" => rateable_obj.class.name,
-                "data-disable-after-rate" => disable_after_rate,
-                "data-readonly" => readonly,
-                "data-star-count" => star
+    print_div_stars dimension, avg, rateable_obj.id, rateable_obj.class.name, disable_after_rate, readonly, star
   end
 
   def rating_for_user(rateable_obj, rating_user, dimension = nil, options = {})
@@ -31,15 +27,21 @@ module Helpers
       readonly = current_user.present? ? !rateable_obj.can_rate?(current_user.id, dimension) : true
     end
 
-    content_tag :div, '', "data-dimension" => dimension, :class => "star", "data-rating" => stars,
-                "data-id" => rateable_obj.id, "data-classname" => rateable_obj.class.name,
-                "data-disable-after-rate" => disable_after_rate,
-                "data-readonly" => readonly,
-                "data-star-count" => stars
+    print_div_stars dimension, stars, rateable_obj.id, rateable_obj.class.name, disable_after_rate, readonly, stars
   end
 
 end
 
 class ActionView::Base
   include Helpers
+end
+
+private
+
+def print_div_stars(dimension, rating, id, class_name, disable_after_rate, readonly, star_count)
+  content_tag :div, '', "data-dimension" => dimension, :class => "star", "data-rating" => rating,
+              "data-id" => id, "data-classname" => class_name,
+              "data-disable-after-rate" => disable_after_rate,
+              "data-readonly" => readonly,
+              "data-star-count" => star_count
 end
