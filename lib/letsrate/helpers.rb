@@ -40,11 +40,16 @@ end
 private
 
 def print_div_stars(dimension, rating, id, class_name, disable_after_rate, readonly, star_count, path)
-  options = {"data-dimension" => dimension, :class => "star", "data-rating" => rating,
-             "data-id" => id, "data-classname" => class_name,
-             "data-disable-after-rate" => disable_after_rate,
-             "data-readonly" => readonly,
-             "data-star-count" => star_count}
+  options = {
+      "data-dimension" => dimension, :class => "star", "data-rating" => rating,
+      "data-id" => id, "data-classname" => class_name,
+      "data-disable-after-rate" => disable_after_rate,
+      "data-readonly" => readonly,
+      "data-star-count" => star_count,
+      test: false,
+      test: 'salut',
+      test2: true,
+  }
   options['data-path'] = path if path
 
   content_tag :div, '', options
