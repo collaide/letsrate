@@ -10,7 +10,7 @@ module Helpers
 
     disable_after_rate = options[:disable_after_rate] || true
 
-    readonly = (current_user && rateable_obj.can_rate?(current_user, dimension))
+    readonly = (current_user && rateable_obj.can_rate?(current_user, dimension)) ? 'false' : 'true'
 
     print_div_stars dimension, avg, rateable_obj.id, rateable_obj.class.name, disable_after_rate, readonly, star, path
   end
@@ -44,10 +44,8 @@ def print_div_stars(dimension, rating, id, class_name, disable_after_rate, reado
       "data-dimension" => dimension, :class => "star", "data-rating" => rating,
       "data-id" => id, "data-classname" => class_name,
       "data-disable-after-rate" => disable_after_rate,
-      "data-readonly" => readonly,
-      "data-star-count" => star_count,
-      test: false,
-      test2: true,
+      "data-read-only" => readonly,
+      "data-star-count" => star_count
   }
   options['data-path'] = path if path
 
